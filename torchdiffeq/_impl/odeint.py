@@ -30,9 +30,7 @@ def odeint(func, y0, t, rtol=1e-7, atol=1e-9, method=None, options=None):
 
     solver = SOLVERS[method](func=func, y0=y0, rtol=rtol, atol=atol, **options)
     solution = solver.integrate(t)
-    print('odeint')
-    
-    
+        
     if shapes is not None:
         solution = _flat_to_shape(solution, (len(t),), shapes)
     return solution 
