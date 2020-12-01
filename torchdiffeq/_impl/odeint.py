@@ -25,7 +25,18 @@ SOLVERS = {
 
 
 def odeint(func, y0, t, rtol=1e-7, atol=1e-9, method=None, options=None):
-    """Integrate a system of ordinary differential equations.
+   
+    shapes, func, y0, t, rtol, atol, method, options = _check_inputs(func, y0, t, rtol, atol, method, options, SOLVERS)
+
+    solver = SOLVERS[method](func=func, y0=y0, rtol=rtol, atol=atol, **options)
+    solution = solver.integrate(t)
+    print("Solucionado dy/dt por odeint")
+    
+    if shapes is not None:
+        solution = _flat_to_shape(solution, (len(t),), shapes)
+    return solution 
+
+ """Integrate a system of ordinary differential equations.
     
     Solves the initial value problem for a non-stiff system of first order ODEs:
         ```
@@ -61,13 +72,4 @@ def odeint(func, y0, t, rtol=1e-7, atol=1e-9, method=None, options=None):
     Raises:
         ValueError: if an invalid `method` is provided.
     """
-    shapes, func, y0, t, rtol, atol, method, options = _check_inputs(func, y0, t, rtol, atol, method, options, SOLVERS)
-
-    #solver = SOLVERS[method](func=func, y0=y0, rtol=rtol, atol=atol, **options)
-    #solution = solver.integrate(t)
-    print("Solucionado dy/dt por odeint")
-    
-    if shapes is not None:
-        solution = _flat_to_shape(solution, (len(t),), shapes)
-    return solution 
 
