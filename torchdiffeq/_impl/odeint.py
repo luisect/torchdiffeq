@@ -34,6 +34,6 @@ def odeint(func, y0, t, rtol=1e-7, atol=1e-9, method=None, options=None):
     
     if shapes is not None:
         solution = _flat_to_shape(solution, (len(t),), shapes)
-    return print("Solucionado dy/dt por odeint"), solution 
+    return solution 
 
  
