@@ -18,6 +18,7 @@ class OdeintAdjointMethod(torch.autograd.Function):
         ctx.adjoint_options = adjoint_options
         ctx.t_requires_grad = t_requires_grad
 
+        print("Forward adjoint")
         with torch.no_grad():
             y = odeint(func, y0, t, rtol=rtol, atol=atol, method=method, options=options)
         ctx.save_for_backward(t, y, *adjoint_params)
@@ -25,6 +26,7 @@ class OdeintAdjointMethod(torch.autograd.Function):
 
     @staticmethod
     def backward(ctx, grad_y):
+        print("Backrward adjoint")
         with torch.no_grad():
             shapes = ctx.shapes
             func = ctx.func
