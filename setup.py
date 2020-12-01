@@ -19,7 +19,7 @@ setuptools.setup(
     author="Ricky Tian Qi Chen",
     author_email="rtqichen@cs.toronto.edu",
     description="ODE solvers and adjoint sensitivity analysis in PyTorch.",
-    url="https://github.com/rtqichen/torchdiffeq",
+    url="https://github.com/luisect/torchdiffeq",
     packages=setuptools.find_packages(),
     install_requires=['torch>=1.3.0'],
     python_requires='~=3.6',
