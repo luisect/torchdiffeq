@@ -26,8 +26,8 @@ class OdeintAdjointMethod(torch.autograd.Function):
 
     @staticmethod
     def backward(ctx, grad_y):
-        print("Backrward adjoint")
         with torch.no_grad():
+            print("Backrward adjoint")
             shapes = ctx.shapes
             func = ctx.func
             adjoint_rtol = ctx.adjoint_rtol
@@ -74,6 +74,7 @@ class OdeintAdjointMethod(torch.autograd.Function):
             ##################################
 
             # [-1] because y and grad_y are both of shape (len(t), *y0.shape)
+            print("Set up initial state")
             aug_state = [torch.zeros((), dtype=y.dtype, device=y.device), y[-1], grad_y[-1]]  # vjp_t, y, vjp_y
             aug_state.extend([torch.zeros_like(param) for param in adjoint_params])  # vjp_params
 
@@ -83,6 +84,7 @@ class OdeintAdjointMethod(torch.autograd.Function):
 
             # TODO: use a nn.Module and call odeint_adjoint to implement higher order derivatives.
             def augmented_dynamics(t, y_aug):
+                print("Set up backward ODE func")
                 # Dynamics of the original system augmented with
                 # the adjoint wrt y, and an integrator wrt t and args.
                 y = y_aug[1]
