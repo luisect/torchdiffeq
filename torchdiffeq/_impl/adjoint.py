@@ -31,7 +31,11 @@ class OdeintAdjointMethod(torch.autograd.Function):
     @staticmethod
     def backward(ctx, grad_y):
         with torch.no_grad():         
-                             
+            
+            print("something")
+            time.sleep(5.5)    # Pause 5.5 seconds
+            print("something")
+            
             shapes = ctx.shapes
             func = ctx.func
             adjoint_rtol = ctx.adjoint_rtol
