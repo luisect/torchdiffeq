@@ -31,11 +31,7 @@ class OdeintAdjointMethod(torch.autograd.Function):
     @staticmethod
     def backward(ctx, grad_y):
         with torch.no_grad():         
-            
-            print("something")
-            time.sleep(5.5)    # Pause 5.5 seconds
-            print("something")
-            
+                          
             shapes = ctx.shapes
             func = ctx.func
             adjoint_rtol = ctx.adjoint_rtol
@@ -95,8 +91,8 @@ class OdeintAdjointMethod(torch.autograd.Function):
                 print("Set up backward ODE func")
                 # Dynamics of the original system augmented with
                 # the adjoint wrt y, and an integrator wrt t and args.
-                y = y_aug[1]
-                adj_y = y_aug[2]
+                #y = y_aug[1]                                                      #
+                #adj_y = y_aug[2]                                                  #
                 # ignore gradients wrt time and parameters
 
                 with torch.enable_grad():
