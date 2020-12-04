@@ -11,7 +11,7 @@ with open(os.path.join(here, 'torchdiffeq', '__init__.py')) as f:
         version = meta_match.group(1)
     else:
         raise RuntimeError("Unable to find __version__ string.")
-print("torchdiffeq edt")
+
 
 
 setuptools.setup(
