@@ -91,8 +91,8 @@ class OdeintAdjointMethod(torch.autograd.Function):
                 print("Set up backward ODE func")
                 # Dynamics of the original system augmented with
                 # the adjoint wrt y, and an integrator wrt t and args.
-                #y = y_aug[1]                                                      #
-                #adj_y = y_aug[2]                                                  #
+                y = y_aug[1]                                                      #
+                adj_y = y_aug[2]                                                  #
                 # ignore gradients wrt time and parameters
 
                 with torch.enable_grad():
@@ -103,7 +103,7 @@ class OdeintAdjointMethod(torch.autograd.Function):
                     # If using an adaptive solver we don't want to waste time resolving dL/dt unless we need it (which
                     # doesn't necessarily even exist if there is piecewise structure in time), so turning off gradients
                     # wrt t here means we won't compute that if we don't need it.
-                    func_eval = func(t if t_requires_grad else t_, y)
+                #   func_eval = func(t if t_requires_grad else t_, y)
 
                     # Workaround for PyTorch bug #39784
                     _t = torch.as_strided(t, (), ())
